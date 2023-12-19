@@ -1,0 +1,15 @@
+to install react query- yarn add react-query
+QueryClient, QueryClientProvider
+
+import { useQuery } from "react-query";
+const { data, isLoading, isError, error } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes
+  );
+
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+  if (isError) {
+    return <h2>{error.message}</h2>;
+  }
