@@ -20,9 +20,28 @@ import { ReactQueryDevtools } from "react-query/devtools";
 const { data, isLoading, isError, error, isFetching } = useQuery(
     "super-heroes",
     fetchSuperHeroes,
-    { cacheTime: 5000 }
+    { cacheTime: 5000 } //default cache time is 5 mins
   );
   isFetching - react query caches the data for 5 minutes, in the background 
-  react query uses fetches the data, after the cache time expires - to check
+  react query fetches the data, after the cache time expires - to check
   use isFetching (first cached data then fetched data)
   (there needs to be user activity on page like clicks)
+  
+Stale time - for redundant data, helps to avoid fetching in the background
+const { data, isLoading, isError, error, isFetching } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {staleTime: 30000}
+  );
+
+Refetch data:
+  const RqSuperHeroes = () => {
+  const { data, isLoading, isError, error, isFetching } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      refetchOnMount: true, //if false, no fetching after initial fetch
+      refetchOnWindowFocus: true, //will update whenever the window comes in focus
+    }
+  );
+}
