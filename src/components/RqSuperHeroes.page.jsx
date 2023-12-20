@@ -6,10 +6,13 @@ const fetchSuperHeroes = () => {
 };
 
 const RqSuperHeroes = () => {
-  const { data, isLoading, isError, error } = useQuery(
+  const { data, isLoading, isError, error, isFetching } = useQuery(
     "super-heroes",
-    fetchSuperHeroes
+    fetchSuperHeroes,
+    { cacheTime: 5000 }
   );
+
+  console.log(isLoading, isFetching);
 
   if (isLoading) {
     return <h2>Loading...</h2>;

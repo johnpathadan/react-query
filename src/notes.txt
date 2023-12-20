@@ -3,7 +3,7 @@ QueryClient, QueryClientProvider
 
 import { useQuery } from "react-query";
 const { data, isLoading, isError, error } = useQuery(
-    "super-heroes",
+    "super-heroes", //this is a query key
     fetchSuperHeroes
   );
 
@@ -13,3 +13,16 @@ const { data, isLoading, isError, error } = useQuery(
   if (isError) {
     return <h2>{error.message}</h2>;
   }
+
+import { ReactQueryDevtools } from "react-query/devtools";
+<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+
+const { data, isLoading, isError, error, isFetching } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    { cacheTime: 5000 }
+  );
+  isFetching - react query caches the data for 5 minutes, in the background 
+  react query uses fetches the data, after the cache time expires - to check
+  use isFetching (first cached data then fetched data)
+  (there needs to be user activity on page like clicks)
