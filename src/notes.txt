@@ -71,3 +71,49 @@ useQuery onClick - fetching data wont happen when page loads, instead only when 
         Fetch Heroes
       </button>
 
+Success and error callbacks - to perform side effects like toast when api call is complete
+const onSuccess = (data) => {
+    console.log("Perform side effect after fetching", data);
+  };
+
+  const onError = (error) => {
+    console.log("Perform side effect after encountering an error", error);
+  };
+
+  const { data, isLoading, isError, error, isFetching, refetch } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      onSuccess: onSuccess,
+      onError: onError,
+    }
+  );
+
+Data transformation - to transform data that front end components can consume. Data transformation
+includes data filtering.
+
+    const { data, isLoading, isError, error, isFetching, refetch } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      onSuccess: onSuccess,
+      onError: onError,
+      select: (data) => {
+        const superHeroNames = data.data.map((hero) => {
+          return ({name: hero.name, id: hero.id});
+        });
+        return superHeroNames;
+      },
+    }
+  );
+  {data.map((hero) => {
+        return (
+          <div key={hero.id}>
+            <p>
+              {hero.name} <span>{hero.id}</span>
+            </p>
+          </div>
+        );
+      })}
+
+
