@@ -45,3 +45,29 @@ Refetch data:
     }
   );
 }
+
+polling - continuous fetching
+
+  const { data, isLoading, isError, error, isFetching } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      refetchInterval: 8000,
+      refetchIntervalInBackground: true,
+    }
+  );
+
+useQuery onClick - fetching data wont happen when page loads, instead only when user 
+  clicks a button
+    const { data, isLoading, isError, error, isFetching, refetch } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      enabled: false, //to disable default fetching
+    }
+  );
+
+    <button type="button" onClick={refetch}>
+        Fetch Heroes
+      </button>
+
