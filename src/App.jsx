@@ -29,7 +29,7 @@ function App() {
           </nav>
           <Routes>
             <Route
-              path="/super-heroes/:heroId"
+              path="/rq-super-heroes/:heroId"
               element={<SuperHeroDetails />}
             />
             <Route path="/super-heroes" element={<SuperHeroesPage />} />

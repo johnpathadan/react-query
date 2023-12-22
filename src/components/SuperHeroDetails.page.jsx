@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useSuperHeroData } from "../hooks/useSuperheroData";
+import { useSuperHeroDetails } from "../hooks/useSuperHeroDetails";
 
 export const SuperHeroDetails = () => {
   const { heroId } = useParams();
 
-  const { isLoading, data, isError, error } = useSuperHeroData(heroId);
+  const { isLoading, data, isError, error } = useSuperHeroDetails(heroId);
 
   if (isLoading) {
     return <h2>Loading...</h2>;
